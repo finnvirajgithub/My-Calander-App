@@ -32,7 +32,7 @@ public class onetimeActivity extends AppCompatActivity {
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(onetimeActivity.this, loginscreen.class);
+                    Intent intent = new Intent(onetimeActivity.this, signup.class);
                     startActivity(intent);
                 }
             });
