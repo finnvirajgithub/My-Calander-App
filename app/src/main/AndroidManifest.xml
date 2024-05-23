@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Today"
         tools:targetApi="31">
         <activity
+            android:name=".loginscreen"
+            android:exported="false" />
+        <activity
             android:name=".onetimeActivity"
             android:exported="false" />
         <activity
