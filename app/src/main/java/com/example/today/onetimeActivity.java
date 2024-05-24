@@ -26,7 +26,7 @@ public class onetimeActivity extends AppCompatActivity {
         if(FirstTime.equals("Yes")){
 
             //if application was opened for the firsttime..
-            Intent intent = new Intent(onetimeActivity.this, loginscreen.class);
+            Intent intent = new Intent(onetimeActivity.this, signup.class);
             startActivity(intent);
 
             next.setOnClickListener(new View.OnClickListener() {

@@ -21,7 +21,7 @@
         app:srcCompat="@drawable/signin" />
 
     <EditText
-        android:id="@+id/editTextText"
+        android:id="@+id/signupemail"
         android:layout_width="380dp"
         android:layout_height="48dp"
         android:layout_marginTop="73dp"
@@ -41,24 +41,26 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <EditText
-        android:id="@+id/editTextText1"
+        android:id="@+id/signupconfirmpassword"
         android:layout_width="380dp"
         android:layout_height="48dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/custom_input"
-        android:drawableStart="@drawable/custom_email"
+        android:drawableStart="@drawable/custom_key"
+        android:drawableEnd="@drawable/show"
         android:drawablePadding="12dp"
         android:ems="10"
         android:fontFamily="@font/lexend_semibold"
         android:gravity="center_vertical"
         android:hint="Password"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText" />
+        app:layout_constraintTop_toBottomOf="@+id/signupemail" />
+
 
     <Button
         android:id="@+id/button"
@@ -74,10 +76,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.724"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText1" />
+        app:layout_constraintTop_toBottomOf="@+id/signupconfirmpassword" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/signupbtn"
         android:layout_width="380dp"
         android:layout_height="48dp"
         android:layout_marginTop="48dp"
@@ -93,7 +95,7 @@
         app:layout_constraintTop_toBottomOf="@+id/button" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/haveanaccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -103,13 +105,12 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/signupbtn" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/loginredirect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="128dp"
         android:background="@drawable/forgot_password"
         android:fontFamily="@font/lexend_semibold"
         android:paddingLeft="0dp"
@@ -118,10 +119,12 @@
         android:textColor="@android:color/holo_green_dark"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signupbtn" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/signupwithgoogle"
         android:layout_width="380dp"
         android:layout_height="48dp"
         android:background="@drawable/loginwithgoogle"
@@ -135,10 +138,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/loginredirect" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/signupwithfacebook"
         android:layout_width="380dp"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
@@ -153,20 +156,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/signupwithgoogle" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/todayinsignup"
         android:layout_width="204dp"
         android:layout_height="125dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5"
+        app:layout_constraintTop_toBottomOf="@+id/signupwithfacebook"
         app:srcCompat="@drawable/logo" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
