@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "424131819354",
+    "firebase_url": "https://todaytodoapp-87595-default-rtdb.firebaseio.com",
+    "project_id": "todaytodoapp-87595",
+    "storage_bucket": "todaytodoapp-87595.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:424131819354:android:bd065adad3c11a45742563",
+        "android_client_info": {
+          "package_name": "com.example.today"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "424131819354-sdlscecdn08hddmai3levg23mfm26d14.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.today",
+            "certificate_hash": "aa13b925734a324b784b43a444edb9215989d6da"
+          }
+        },
+        {
+          "client_id": "424131819354-h1tqe4k29i23fqe3ah7o5u8n9nvbpu2s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6YijDUjG7ERWvXPjFply01c-PoTkgP-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "424131819354-h1tqe4k29i23fqe3ah7o5u8n9nvbpu2s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

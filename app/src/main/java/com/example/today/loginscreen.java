@@ -6,9 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,9 +20,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,6 +47,7 @@ public class loginscreen extends AppCompatActivity {
     FirebaseDatabase database;
     GoogleSignInClient mGoogleSignInClient;
     int RC_SIGN_IN = 20;
+    CheckBox remember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,7 @@ public class loginscreen extends AppCompatActivity {
 
         inputEmail = findViewById(R.id.loginemail);
         inputPassword = findViewById(R.id.loginpassword);
+        remember = findViewById(R.id.remembermeinlogin);
         btnlogin = findViewById(R.id.loginbtn);
         btnGoogle = findViewById(R.id.loginwithgoogle);
         progressDialog = new ProgressDialog(this);
@@ -58,7 +66,17 @@ public class loginscreen extends AppCompatActivity {
         mUser = mAuth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
 
+        FirebaseApp.initializeApp(this);
 
+        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        String checkbox = preferences.getString("remember","");
+
+        if (checkbox.equals("true")){
+            Intent intent = new Intent(loginscreen.this, Home.class);
+            startActivity(intent);
+        } else if (checkbox.equals("false")) {
+            Toast.makeText(this, "Please sign in", Toast.LENGTH_SHORT).show();
+        }
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -89,6 +107,28 @@ public class loginscreen extends AppCompatActivity {
             }
         });
 
+        remember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (buttonView.isChecked()){
+
+                    SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember","true");
+                    editor.apply();
+                    Toast.makeText(loginscreen.this, "Checked", Toast.LENGTH_SHORT).show();
+
+                } else if (!buttonView.isChecked()) {
+                    SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember","false");
+                    editor.apply();
+                    Toast.makeText(loginscreen.this, "Unchecked", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         
     }
 
@@ -104,16 +144,60 @@ public class loginscreen extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == RC_SIGN_IN){
+            if (data == null) {
+                Toast.makeText(this, "Sign-in intent data is null", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try {
+
+                // Try to get the signed-in Google account from the task
                 GoogleSignInAccount account = task.getResult(ApiException.class);
 
-                firebaseAuth(account.getIdToken());
+                if (account != null) {
+                    // Use the ID token from the Google account to authenticate with Firebase
+                    firebaseAuth(account.getIdToken());
+                } else {
+                    Toast.makeText(this, "GoogleSignInAccount is null", Toast.LENGTH_SHORT).show();
+                }
+
             } catch (ApiException e) {
-                Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                // If sign-in fails, display a more detailed message
+                int statusCode = e.getStatusCode();
+                String message = "Sign-in failed: " + e.getMessage();
+
+                // Provide user-friendly messages based on the status code
+                switch (statusCode) {
+                    case GoogleSignInStatusCodes.SIGN_IN_CANCELLED:
+                        message = "Sign-in was cancelled by the user.";
+                        break;
+                    case GoogleSignInStatusCodes.SIGN_IN_FAILED:
+                        message = "Sign-in failed. Please try again.";
+                        break;
+                    case GoogleSignInStatusCodes.NETWORK_ERROR:
+                        message = "Network error. Please check your connection and try again.";
+                        break;
+                    case GoogleSignInStatusCodes.INVALID_ACCOUNT:
+                        message = "Invalid account. Please check the account and try again.";
+                        break;
+                    case GoogleSignInStatusCodes.DEVELOPER_ERROR:
+                        message = "Developer error. Please check the configuration.";
+                        break;
+                    default:
+                        message = "Unknown error occurred. Please try again.";
+                        break;
+                }
+
+                Log.e("SignInActivity", "signInResult:failed code=" + statusCode, e);
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                // Handle other possible exceptions
+                Log.e("SignInActivity", "signInResult:failed", e);
+                Toast.makeText(this, "Sign-in failed with exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
+
 
         }
     }
