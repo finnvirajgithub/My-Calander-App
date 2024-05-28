@@ -50,7 +50,5 @@ public class Home extends AppCompatActivity {
                 return false;
             }
         });
-
-
     }
 }
