@@ -43,7 +43,6 @@ public class AddFragment extends Fragment {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 stringDateSelected = year + "-" + (month + 1) + "-" + dayOfMonth;
-
             }
         });
 
@@ -54,7 +53,6 @@ public class AddFragment extends Fragment {
                     Toast.makeText(getActivity(), "Please select a date", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
                 String name = eventName.getText().toString();
                 String note = eventNote.getText().toString();
                 String time = eventTime.getText().toString();
@@ -66,7 +64,7 @@ public class AddFragment extends Fragment {
                 }
                 databaseReference = FirebaseDatabase.getInstance().getReference(stringDateSelected);
                 String eventId = databaseReference.push().getKey();
-                event_item event = new event_item(name, note, time, ampmText);
+                event_item event = new event_item(name, note, time, ampmText,eventId);
                 databaseReference.child(eventId).setValue(event)
                         .addOnSuccessListener(aVoid -> Toast.makeText(getActivity(), "Event saved", Toast.LENGTH_SHORT).show())
                         .addOnFailureListener(e -> Toast.makeText(getActivity(), "Failed to save event", Toast.LENGTH_SHORT).show());

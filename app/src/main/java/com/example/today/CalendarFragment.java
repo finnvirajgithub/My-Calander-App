@@ -63,8 +63,9 @@ public class CalendarFragment extends Fragment {
         calenderView = rootView.findViewById(R.id.calendarincalender);
         calendarRecylerView = rootView.findViewById(R.id.recycleView);
         calendarRecylerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        eventAdapter = new eventAdapter(eventList);
+        eventAdapter = new eventAdapter(getContext(), getParentFragmentManager(),eventList);
         calendarRecylerView.setAdapter(eventAdapter);
+
 
         Calendar today = Calendar.getInstance();
 
@@ -93,6 +94,7 @@ public class CalendarFragment extends Fragment {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                         event_item event = snapshot.getValue(event_item.class);
                         if (event != null){
+                            event.setFirebaseKey(snapshot.getKey());
                             eventList.add(event);
                         }
                     }
@@ -102,7 +104,6 @@ public class CalendarFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getActivity(), "Error fetching data", Toast.LENGTH_SHORT).show();
-
             }
         });
     }

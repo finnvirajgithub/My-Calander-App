@@ -1,20 +1,24 @@
 package com.example.today;
 
-public class event_item {
+import java.io.Serializable;
+
+public class event_item implements Serializable {
     private String eventnameincalendar;
     private String eventnoteincalendar;
     private String eventtimeincalendar;
     private String am_pmincalendar;
+    private String firebaseKey;
 
     public event_item(){
 
     }
 
-    public event_item(String eventnameincalendar, String eventnoteincalendar, String eventtimeincalendar, String am_pmincalendar) {
+    public event_item(String eventnameincalendar, String eventnoteincalendar, String eventtimeincalendar, String am_pmincalendar, String firebaseKey) {
         this.eventnameincalendar = eventnameincalendar;
         this.eventnoteincalendar = eventnoteincalendar;
         this.eventtimeincalendar = eventtimeincalendar;
         this.am_pmincalendar = am_pmincalendar;
+        this.firebaseKey = firebaseKey;
     }
 
     public void setEventnameincalendar(String eventnameincalendar) {
@@ -31,6 +35,11 @@ public class event_item {
 
     public void setAm_pmincalendar(String am_pmincalendar) {
         this.am_pmincalendar = am_pmincalendar;
+    }
+
+    public void setFirebaseKey(String firebaseKey) {
+
+        this.firebaseKey = firebaseKey;
     }
 
 
@@ -52,5 +61,10 @@ public class event_item {
     public String getAm_pmincalendar() {
 
         return am_pmincalendar;
+    }
+
+    public String getFirebaseKey() {
+
+        return firebaseKey;
     }
 }
