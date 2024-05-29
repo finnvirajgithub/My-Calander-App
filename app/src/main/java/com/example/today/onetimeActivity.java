@@ -43,5 +43,12 @@ public class onetimeActivity extends AppCompatActivity {
             editor.putString("FirstTimeInstall","Yes");
             editor.apply();
         }
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(onetimeActivity.this, loginscreen.class);
+                startActivity(intent);
+            }
+        });
     }
 }
