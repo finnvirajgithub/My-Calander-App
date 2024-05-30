@@ -46,14 +46,6 @@ public class UpdateFragment extends Fragment {
         updateButton = view.findViewById(R.id.updevent);
         deleteButton = view.findViewById(R.id.dltevent);
 
-        Calendar today = Calendar.getInstance();
-
-        int year = today.get(Calendar.YEAR);
-        int month = today.get(Calendar.MONTH); // Note: January is 0, December is 11
-        int day = today.get(Calendar.DAY_OF_MONTH);
-
-        stringDateSelected = year + "-" + (month + 1) + "-" + day;
-
         if (getArguments() != null) {
             event = (event_item) getArguments().getSerializable("event");
 
@@ -112,6 +104,10 @@ public class UpdateFragment extends Fragment {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (stringDateSelected == null) {
+                    Toast.makeText(getActivity(), "Date not selected", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(stringDateSelected);
                 String firebaseKey = event.getFirebaseKey();
                 databaseReference.child(firebaseKey).removeValue()

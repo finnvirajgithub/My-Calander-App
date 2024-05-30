@@ -37,7 +37,7 @@ import java.util.HashMap;
 public class signup extends AppCompatActivity {
 
     Button redirectlogin;
-    EditText inputEmail, inputPassword, inputComfirmPassword;
+    EditText inputEmail, inputPassword, inputComfirmPassword, inputName, inputPhone;
     Button btnSignup;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     ProgressDialog progressDialog;
@@ -57,6 +57,8 @@ public class signup extends AppCompatActivity {
         redirectlogin = findViewById(R.id.loginredirect);
 
         inputEmail = findViewById(R.id.signupemail);
+        inputName = findViewById(R.id.signupname);
+        inputPhone = findViewById(R.id.signupphone);
         inputPassword = findViewById(R.id.signuppassword);
         inputComfirmPassword = findViewById(R.id.signupconfirmpassword);
         remember = findViewById(R.id.remembermeinsignup);
@@ -230,6 +232,8 @@ public class signup extends AppCompatActivity {
 
     private void PerformAuth() {
         String email = inputEmail.getText().toString();
+        String name = inputName.getText().toString();
+        String phone = inputPhone.getText().toString();
         String password = inputPassword.getText().toString();
         String confirmPasword = inputComfirmPassword.getText().toString();
 
@@ -250,6 +254,7 @@ public class signup extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         progressDialog.dismiss();
+                        saveUserDetails(email, name, phone);
                         sendUserToNextActivity();
                         Toast.makeText(signup.this, "Succesfully Sign up", Toast.LENGTH_SHORT).show();
                     }else {
@@ -265,5 +270,13 @@ public class signup extends AppCompatActivity {
         Intent intent = new Intent(signup.this, Home.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+    private void saveUserDetails(String email, String name, String phone) {
+        SharedPreferences preferences = getSharedPreferences("userDetails", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("email", email);
+        editor.putString("name", name);
+        editor.putString("phone", phone);
+        editor.apply();
     }
 }
