@@ -106,7 +106,7 @@
         android:id="@+id/saveevent"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/loginbtn"
         android:fontFamily="@font/lexend"
         android:text="Save"

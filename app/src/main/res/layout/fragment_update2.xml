@@ -103,17 +103,32 @@
 
     <Button
         android:id="@+id/updevent"
-        android:layout_width="340dp"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="28dp"
         android:background="@drawable/loginbtn"
         android:fontFamily="@font/lexend"
         android:text="Update"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dltevent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/dltevent"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/deletebtn"
+        android:fontFamily="@font/lexend"
+        android:text="Delete"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/updevent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
