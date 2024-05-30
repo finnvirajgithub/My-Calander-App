@@ -1,9 +1,12 @@
 package com.example.today;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +20,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class UpdateFragment extends Fragment {
@@ -29,6 +33,7 @@ public class UpdateFragment extends Fragment {
     private CalendarView updateEventCalendar;
     private String stringDateSelected;
     private Button updateButton;
+    private Button deleteButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,6 +47,7 @@ public class UpdateFragment extends Fragment {
         updateEventNote = view.findViewById(R.id.updatenote);
         updateEventCalendar = view.findViewById(R.id.calendarinupdate);
         updateButton = view.findViewById(R.id.updevent);
+        deleteButton = view.findViewById(R.id.dltevent);
 
         if (getArguments() != null) {
             event = (event_item) getArguments().getSerializable("event");
@@ -91,7 +97,47 @@ public class UpdateFragment extends Fragment {
                             .addOnFailureListener(e -> {
                                 Toast.makeText(getActivity(), "Failed to update event: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                             });
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.container, new CalendarFragment());
+                    transaction.addToBackStack(null); // This will add the transaction to the back stack so the user can navigate back
+                    transaction.commit();
                 }
+            }
+        });
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                alertDialog.setTitle("Delete").setMessage("Do you want to delete event?")
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (stringDateSelected == null) {
+                                    Toast.makeText(getActivity(), "Date not selected", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(stringDateSelected);
+                                String firebaseKey = event.getFirebaseKey();
+                                databaseReference.child(firebaseKey).removeValue()
+                                        .addOnSuccessListener(aVoid -> {
+                                            Toast.makeText(getActivity(), "Event deleted", Toast.LENGTH_SHORT).show();
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Toast.makeText(getActivity(), "Failed to delete event: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        });
+                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                transaction.replace(R.id.container, new CalendarFragment());
+                                transaction.addToBackStack(null); // This will add the transaction to the back stack so the user can navigate back
+                                transaction.commit();
+                            }
+                        }).show();
+                alertDialog.create();
             }
         });
         return view;

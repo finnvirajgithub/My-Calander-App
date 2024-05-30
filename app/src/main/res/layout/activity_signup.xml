@@ -22,7 +22,7 @@
       android:id="@+id/signupemail"
       android:layout_width="340dp"
       android:layout_height="40dp"
-      android:layout_marginTop="62dp"
+      android:layout_marginTop="12dp"
       android:background="@drawable/custom_input"
       android:drawableStart="@drawable/custom_email"
       android:drawablePadding="12dp"
@@ -35,7 +35,7 @@
       android:paddingEnd="12dp"
       android:textSize="14sp"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintHorizontal_bias="0.507"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
@@ -43,7 +43,7 @@
       android:id="@+id/signupname"
       android:layout_width="340dp"
       android:layout_height="40dp"
-      android:layout_marginTop="15dp"
+      android:layout_marginTop="12dp"
       android:background="@drawable/custom_input"
       android:drawableStart="@drawable/custom_user"
       android:drawablePadding="12dp"
@@ -61,10 +61,31 @@
       app:layout_constraintTop_toBottomOf="@+id/signupemail" />
 
   <EditText
+      android:id="@+id/signupphone"
+      android:layout_width="340dp"
+      android:layout_height="40dp"
+      android:layout_marginTop="12dp"
+      android:background="@drawable/custom_input"
+      android:drawableStart="@drawable/phone_call"
+      android:drawablePadding="12dp"
+      android:ems="10"
+      android:fontFamily="@font/lexend"
+      android:gravity="center_vertical"
+      android:hint="Phone"
+      android:inputType="text"
+      android:paddingStart="12dp"
+      android:paddingEnd="12dp"
+      android:textSize="14sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.492"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/signupname" />
+
+  <EditText
       android:id="@+id/signuppassword"
       android:layout_width="340dp"
       android:layout_height="40dp"
-      android:layout_marginTop="13dp"
+      android:layout_marginTop="12dp"
       android:background="@drawable/custom_input"
       android:drawableStart="@drawable/custom_key"
       android:drawableEnd="@drawable/show"
@@ -80,7 +101,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/signupname" />
+      app:layout_constraintTop_toBottomOf="@+id/signupphone" />
 
   <EditText
       android:id="@+id/signupconfirmpassword"

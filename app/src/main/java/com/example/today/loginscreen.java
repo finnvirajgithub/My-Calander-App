@@ -111,21 +111,11 @@ public class loginscreen extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if (buttonView.isChecked()){
-
-                    SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("remember","true");
-                    editor.apply();
-                    Toast.makeText(loginscreen.this, "Checked", Toast.LENGTH_SHORT).show();
-
-                } else if (!buttonView.isChecked()) {
-                    SharedPreferences preferences = getSharedPreferences("checkbox",MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("remember","false");
-                    editor.apply();
-                    Toast.makeText(loginscreen.this, "Unchecked", Toast.LENGTH_SHORT).show();
-                }
+                SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("remember", isChecked ? "true" : "false");
+                editor.apply();
+                Toast.makeText(loginscreen.this, isChecked ? "Checked" : "Unchecked", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -262,6 +252,7 @@ public class loginscreen extends AppCompatActivity {
         Intent intent = new Intent(loginscreen.this, Home.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
 }
