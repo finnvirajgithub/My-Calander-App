@@ -28,9 +28,6 @@ import java.util.Calendar;
 import java.util.List;
 
 public class CalendarFragment extends Fragment {
-
-    private static final String TAG = "CalendarFragment";
-
     private List<event_item> eventList;
     private RecyclerView calendarRecylerView;
     private eventAdapter eventAdapter;
