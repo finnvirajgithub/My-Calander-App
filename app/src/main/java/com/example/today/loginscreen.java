@@ -39,6 +39,7 @@ public class loginscreen extends AppCompatActivity {
     Button redirectsignup;
     EditText inputEmail, inputPassword;
     Button btnlogin;
+    Button forgotPassword;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     ProgressDialog progressDialog;
     FirebaseAuth mAuth;
@@ -59,6 +60,7 @@ public class loginscreen extends AppCompatActivity {
         inputEmail = findViewById(R.id.loginemail);
         inputPassword = findViewById(R.id.loginpassword);
         remember = findViewById(R.id.remembermeinlogin);
+        forgotPassword = findViewById(R.id.forgotpassword);
         btnlogin = findViewById(R.id.loginbtn);
         btnGoogle = findViewById(R.id.loginwithgoogle);
         progressDialog = new ProgressDialog(this);
@@ -91,6 +93,13 @@ public class loginscreen extends AppCompatActivity {
                 googleSignIn();
             }
         });
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(loginscreen.this, ForgotActivity.class);
+                startActivity(intent);
+            }
+        });
 
         redirectsignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,8 +127,6 @@ public class loginscreen extends AppCompatActivity {
                 Toast.makeText(loginscreen.this, isChecked ? "Checked" : "Unchecked", Toast.LENGTH_SHORT).show();
             }
         });
-
-        
     }
 
     private void googleSignIn() {
@@ -254,5 +261,4 @@ public class loginscreen extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
-
 }

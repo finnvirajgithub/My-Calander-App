@@ -16,6 +16,9 @@
         android:theme="@style/Theme.Today"
         tools:targetApi="34">
         <activity
+            android:name=".ForgotActivity"
+            android:exported="false" />
+        <activity
             android:name=".Home"
             android:exported="false" />
         <activity
@@ -26,8 +29,10 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>/>
+            </intent-filter>
+            />
         </activity>
         <activity
             android:name=".onetimeActivity"
