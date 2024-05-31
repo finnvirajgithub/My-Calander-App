@@ -18,6 +18,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileFragment extends Fragment {
@@ -25,6 +29,8 @@ public class ProfileFragment extends Fragment {
     Button logOut;
     Button edit;
     ImageView imageView;
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +44,22 @@ public class ProfileFragment extends Fragment {
         imageView = view.findViewById(R.id.profile_image);
         logOut = view.findViewById(R.id.logout);
         edit = view.findViewById(R.id.editpro);
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gsc = GoogleSignIn.getClient(getActivity(),gso);
+
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
+        if (acct != null){
+            String personName = acct.getDisplayName();
+            String personEmail = acct.getEmail();
+            String personPhoto = String.valueOf(acct.getPhotoUrl());
+            textViewEmail.setText(personEmail);
+            textViewName.setText(personName);
+            if (personPhoto != null) {
+                Uri uri = Uri.parse(personPhoto);
+                imageView.setImageURI(uri);
+            }
+        }
 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override

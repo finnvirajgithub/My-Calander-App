@@ -1,6 +1,7 @@
 package com.example.today;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +21,7 @@ public class InfoFragment extends Fragment {
     private ArrayList<String>topiclist = new ArrayList<>();
     private ArrayList<String>detaillist = new ArrayList<>();
     private itemAdapter adapter;
+    Button uninstall;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,6 +31,15 @@ public class InfoFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler2);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        uninstall = view.findViewById(R.id.uninstall);
+        uninstall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DELETE);
+                intent.setData(Uri.parse("package:com.example.today"));
+                startActivity(intent);
+            }
+        });
 
         topiclist = new ArrayList<>();
         detaillist = new ArrayList<>();
