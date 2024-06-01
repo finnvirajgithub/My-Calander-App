@@ -81,49 +81,64 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/signupname" />
 
-  <EditText
-      android:id="@+id/signuppassword"
-      android:layout_width="340dp"
-      android:layout_height="40dp"
-      android:layout_marginTop="12dp"
-      android:background="@drawable/custom_input"
-      android:drawableStart="@drawable/custom_key"
-      android:drawableEnd="@drawable/show"
-      android:drawablePadding="12dp"
-      android:ems="10"
-      android:fontFamily="@font/lexend"
-      android:gravity="center_vertical"
-      android:hint="Password"
-      android:inputType="textPassword"
-      android:paddingStart="12dp"
-      android:paddingEnd="12dp"
-      android:textSize="14sp"
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/layout1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:passwordToggleEnabled="true"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/signupphone" />
+      app:layout_constraintTop_toBottomOf="@+id/signupphone">
+    <EditText
+        android:id="@+id/signuppassword"
+        android:layout_width="340dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/custom_key"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:fontFamily="@font/lexend"
+        android:gravity="center_vertical"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textSize="14sp"
+         />
 
-  <EditText
-      android:id="@+id/signupconfirmpassword"
-      android:layout_width="340dp"
-      android:layout_height="40dp"
-      android:layout_marginTop="12dp"
-      android:background="@drawable/custom_input"
-      android:drawableStart="@drawable/custom_key"
-      android:drawableEnd="@drawable/show"
-      android:drawablePadding="12dp"
-      android:ems="10"
-      android:fontFamily="@font/lexend"
-      android:gravity="center_vertical"
-      android:hint="Confirm Password"
-      android:inputType="textPassword"
-      android:paddingStart="12dp"
-      android:paddingEnd="12dp"
-      android:textSize="14sp"
+  </com.google.android.material.textfield.TextInputLayout>
+
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/layout2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:passwordToggleEnabled="true"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.5"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/signuppassword" />
+      app:layout_constraintTop_toBottomOf="@+id/layout1">
+    <EditText
+        android:id="@+id/signupconfirmpassword"
+        android:layout_width="340dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/custom_input"
+        android:drawableStart="@drawable/custom_key"
+        android:drawableEnd="@drawable/show"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:fontFamily="@font/lexend"
+        android:gravity="center_vertical"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textSize="14sp"
+         />
+  </com.google.android.material.textfield.TextInputLayout>
+
 
   <Button
       android:id="@+id/signupbtn"
@@ -139,13 +154,13 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintHorizontal_bias="0.516"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/signupconfirmpassword" />
+      app:layout_constraintTop_toBottomOf="@+id/layout2" />
 
   <TextView
       android:id="@+id/haveanaccount"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="40dp"
+      android:layout_marginStart="10dp"
       android:layout_marginTop="13dp"
       android:fontFamily="@font/lexend"
       android:text="Already have an account"
@@ -158,15 +173,14 @@
       android:id="@+id/loginredirect"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginEnd="89dp"
       android:background="@drawable/forgot_password"
       android:fontFamily="@font/lexend"
+      android:paddingStart="0dp"
       android:paddingLeft="0dp"
       android:text="Log in"
       android:textAllCaps="false"
       android:textColor="@android:color/holo_green_dark"
       android:textSize="16sp"
-      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toEndOf="@+id/haveanaccount"
       app:layout_constraintTop_toBottomOf="@+id/signupbtn" />
 
@@ -220,13 +234,13 @@
       android:id="@+id/remembermeinsignup"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_marginStart="35dp"
+      android:layout_marginStart="10dp"
       android:layout_marginTop="2dp"
       android:fontFamily="@font/lexend"
       android:text="Remember me"
       android:textColor="@android:color/holo_green_dark"
       android:textSize="16sp"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/signupconfirmpassword" />
+      app:layout_constraintTop_toBottomOf="@+id/layout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

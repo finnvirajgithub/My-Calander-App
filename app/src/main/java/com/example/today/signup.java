@@ -45,9 +45,9 @@ public class signup extends AppCompatActivity {
     FirebaseUser mUser;
     Button btnGoogle;
     FirebaseDatabase database;
-    GoogleSignInClient mGoogleSignInClient;
-    int RC_SIGN_IN = 20;
     CheckBox remember;
+    GoogleSignInOptions gso;
+    GoogleSignInClient gsc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,9 @@ public class signup extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
 
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        gsc = GoogleSignIn.getClient(this,gso);
+
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
         String checkbox = preferences.getString("remember","");
 
@@ -81,18 +84,10 @@ public class signup extends AppCompatActivity {
             Toast.makeText(this, "Please sign in", Toast.LENGTH_SHORT).show();
         }
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this,gso);
-
         btnGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                googleSignIn();
+                signIn();
             }
         });
 
@@ -134,72 +129,24 @@ public class signup extends AppCompatActivity {
         });
     }
 
-    private void googleSignIn() {
-
-        Intent intent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(intent,RC_SIGN_IN);
+    void signIn(){
+        Intent signInIntent = gsc.getSignInIntent();
+        startActivityForResult(signInIntent,1000);
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode,Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_SIGN_IN){
-            if (data == null) {
-                Toast.makeText(this, "Sign-in intent data is null", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
+        if (requestCode == 1000){
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try {
-
-                // Try to get the signed-in Google account from the task
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-
-                if (account != null) {
-                    // Use the ID token from the Google account to authenticate with Firebase
-                    firebaseAuth(account.getIdToken());
-                } else {
-                    Toast.makeText(this, "GoogleSignInAccount is null", Toast.LENGTH_SHORT).show();
-                }
+                task.getResult(ApiException.class);
+                sendUserToNextActivity();
 
             } catch (ApiException e) {
-                // If sign-in fails, display a more detailed message
-                int statusCode = e.getStatusCode();
-                String message = "Sign-in failed: " + e.getMessage();
-
-                // Provide user-friendly messages based on the status code
-                switch (statusCode) {
-                    case GoogleSignInStatusCodes.SIGN_IN_CANCELLED:
-                        message = "Sign-in was cancelled by the user.";
-                        break;
-                    case GoogleSignInStatusCodes.SIGN_IN_FAILED:
-                        message = "Sign-in failed. Please try again.";
-                        break;
-                    case GoogleSignInStatusCodes.NETWORK_ERROR:
-                        message = "Network error. Please check your connection and try again.";
-                        break;
-                    case GoogleSignInStatusCodes.INVALID_ACCOUNT:
-                        message = "Invalid account. Please check the account and try again.";
-                        break;
-                    case GoogleSignInStatusCodes.DEVELOPER_ERROR:
-                        message = "Developer error. Please check the configuration.";
-                        break;
-                    default:
-                        message = "Unknown error occurred. Please try again.";
-                        break;
-                }
-
-                Log.e("SignInActivity", "signInResult:failed code=" + statusCode, e);
-                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-                // Handle other possible exceptions
-                Log.e("SignInActivity", "signInResult:failed", e);
-                Toast.makeText(this, "Sign-in failed with exception: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
-
-
         }
     }
 
