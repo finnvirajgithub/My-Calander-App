@@ -46,12 +46,12 @@ This is a simple **Java-based Calendar Application** developed in **Android Stud
 - UI improvements to enhance user experience.
 - Deploy the application to Google Play for public use.
 
-![Image](https://github.com/user-attachments/assets/e5026781-099f-400f-92d3-ee9209fe7f49)
-![Image](https://github.com/user-attachments/assets/dda18096-a563-432e-9a96-ba1c6bfa95a3)
-![Image](https://github.com/user-attachments/assets/19028c19-0228-400f-be5a-342e9791d6e5)
-![Image](https://github.com/user-attachments/assets/d08a6279-259f-4e41-9249-05fcf66bab3e)
-![Image](https://github.com/user-attachments/assets/f4d13a82-2e0a-4499-8e81-74c8903878f8)
-![Image](https://github.com/user-attachments/assets/65492e1a-b278-449b-ace4-bae9f04966e4)
-![Image](https://github.com/user-attachments/assets/eb7eb6bb-28d2-4095-8381-e06b9356f391)
-![Image](https://github.com/user-attachments/assets/3b64c547-bf0c-471e-a8d5-d393ac2cc528)
+<img src="https://github.com/user-attachments/assets/e5026781-099f-400f-92d3-ee9209fe7f49" width="200">
+<img src="https://github.com/user-attachments/assets/dda18096-a563-432e-9a96-ba1c6bfa95a3" width="200">
+<img src="https://github.com/user-attachments/assets/19028c19-0228-400f-be5a-342e9791d6e5" width="200">
+<img src="https://github.com/user-attachments/assets/d08a6279-259f-4e41-9249-05fcf66bab3e" width="200">
+<img src="https://github.com/user-attachments/assets/eb7eb6bb-28d2-4095-8381-e06b9356f391" width="200">
+<img src="https://github.com/user-attachments/assets/65492e1a-b278-449b-ace4-bae9f04966e4" width="200">
+<img src="https://github.com/user-attachments/assets/f4d13a82-2e0a-4499-8e81-74c8903878f8" width="200">
+<img src="https://github.com/user-attachments/assets/3b64c547-bf0c-471e-a8d5-d393ac2cc528" width="200">
 
